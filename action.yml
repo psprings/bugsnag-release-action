@@ -1,0 +1,9 @@
+name: 'Bugsnap Deploy'
+description: 'Notify Bugsnap of a deployment'
+inputs:
+  apiKey:  # id of input
+    description: 'The Bugsnap API Key for your project'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'
