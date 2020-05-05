@@ -1,9 +1,15 @@
 name: 'Bugsnag Deploy'
 description: 'Notify Bugsnag of a deployment'
 inputs:
-  apiKey:  # id of input
+  apiKey:
     description: 'The Bugsnag API Key for your project'
     required: true
+  appVersion:
+    description: 'The version of the application that you are deploying. If action is triggered by a release, it will use the tag by default.'
+    required: false
+  metadata:
+    description: 'Optional metadata tags pertinent to the release'
+    required: false
 runs:
   using: 'node12'
   main: 'index.js'
