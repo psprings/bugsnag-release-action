@@ -14,6 +14,12 @@ inputs:
     description: 'This identifies the unique stage/environment that the application code has been released to. Defaults to `production`'
     default: 'production'
     required: false
+  sourceControlRepository:
+    description: 'The source code repository associated with the released code'
+    required: false
+  sourceControlRevision:
+    description: 'The revision of the source code for this release'
+    required: false
 runs:
   using: 'node12'
   main: 'index.js'

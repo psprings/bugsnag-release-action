@@ -9,13 +9,28 @@ function getReleaseTag() {
   return undefined;
 }
 
+function getInputOrDynamicDefault(inputKey, defaultValue) {
+  let inputValue = core.getInput(inputKey);
+  if (inputValue.length > 0) {
+    return inputValue;
+  }
+  return defaultValue;
+}
+
+function getDefaultRepository() {
+  return github.context.payload.repository.html_url;
+}
+
+function getDefaultRevision() {
+  return github.context.sha;
+}
+
 function generatePayload() {
   const apiKey = core.getInput('apiKey');
-  let appVersion = core.getInput('appVersion');
+  const appVersion = getInputOrDynamicDefault('appVersion', getReleaseTag());
+  const repository = getInputOrDynamicDefault('sourceControlRepository', getDefaultRepository());
+  const revision = getInputOrDynamicDefault('sourceControlRevision', getDefaultRevision());
   const metadata = core.getInput('metadata');
-  if (appVersion.length > 0) {
-    appVersion = getReleaseTag();
-  }
   let payload = {
     apiKey: apiKey,
     appVersion: appVersion,
@@ -23,8 +38,8 @@ function generatePayload() {
     builderName: github.context.actor,
     sourceControl: {
       provider: "github",
-      repository: github.context.payload.repository.html_url,
-      revision: github.context.sha
+      repository: repository,
+      revision: revision
     }
   }
   if (metadata.length > 0) {
@@ -46,13 +61,15 @@ async function submitRelease() {
   return response.json();
 }
 
-try {
-  console.log('This action is not implemented yet!');
-  // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(github, undefined, 2);
-  console.log(`The event payload: ${payload}`);
+const release = async () => {
   let response = await submitRelease();
   console.log(response);
+}
+
+try {
+  const payload = JSON.stringify(github, undefined, 2);
+  console.log(`The event payload: ${payload}`);
+  release();
 } catch (error) {
   core.setFailed(error.message);
 }
