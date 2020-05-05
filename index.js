@@ -31,12 +31,14 @@ function generatePayload() {
   const appVersion = getInputOrDynamicDefault('appVersion', getReleaseTag());
   const repository = getInputOrDynamicDefault('sourceControlRepository', getDefaultRepository());
   const revision = getInputOrDynamicDefault('sourceControlRevision', getDefaultRevision());
+  const autoAssignRelease = (core.getInput('autoAssignRelease').toLowerCase() === 'true');
   const metadata = core.getInput('metadata');
   let payload = {
     apiKey: apiKey,
     appVersion: appVersion,
     releaseStage: core.getInput('releaseStage'),
     builderName: github.context.actor,
+    autoAssignRelease: autoAssignRelease,
     sourceControl: {
       provider: "github",
       repository: repository,
