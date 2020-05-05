@@ -62,12 +62,17 @@ async function submitRelease() {
     }
   }
   
+  let responseData = '';
   const req = https.request(options, (res) => {
     console.log(`statusCode: ${res.statusCode}`)
   
     res.on('data', (d) => {
-      process.stdout.write(d);
+      responseData += d;
     })
+
+    res.on('end', () => {
+      console.log(JSON.parse(responseData).explanation);
+    });
   })
   
   req.on('error', (error) => {
@@ -79,8 +84,10 @@ async function submitRelease() {
 }
 
 try {
-  const payload = JSON.stringify(github, undefined, 2);
-  console.log(`The event payload: ${payload}`);
+  if (process.env.DEBUG === 'true') {
+    const payload = JSON.stringify(github, undefined, 2);
+    console.log(`The event payload: ${payload}`);
+  }
   submitRelease();
 } catch (error) {
   core.setFailed(error.message);
