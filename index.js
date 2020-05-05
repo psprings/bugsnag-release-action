@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+const https = require('https');
 
 function getReleaseTag() {
   const release = github.context.payload.release;
@@ -49,27 +50,38 @@ function generatePayload() {
 }
 
 async function submitRelease() {
-  let data = generatePayload();
-  const response = await fetch('https://build.bugsnag.com/', {
+  let data = JSON.stringify(generatePayload());
+  const options = {
+    hostname: 'build.bugsnag.com',
+    port: 443,
+    path: '/',
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
-    },
-    redirect: 'follow',
-    body: JSON.stringify(data)
-  });
-  return response.json();
-}
-
-const release = async () => {
-  let response = await submitRelease();
-  console.log(response);
+      'Content-Type': 'application/json',
+      'Content-Length': data.length
+    }
+  }
+  
+  const req = https.request(options, (res) => {
+    console.log(`statusCode: ${res.statusCode}`)
+  
+    res.on('data', (d) => {
+      process.stdout.write(d);
+    })
+  })
+  
+  req.on('error', (error) => {
+    console.error(error)
+  })
+  
+  req.write(data)
+  req.end()
 }
 
 try {
   const payload = JSON.stringify(github, undefined, 2);
   console.log(`The event payload: ${payload}`);
-  release();
+  submitRelease();
 } catch (error) {
   core.setFailed(error.message);
 }
