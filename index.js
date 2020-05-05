@@ -19,7 +19,7 @@ function generatePayload() {
   let payload = {
     apiKey: apiKey,
     appVersion: appVersion,
-    releaseStage: "production",
+    releaseStage: core.getInput('releaseStage'),
     builderName: github.context.actor,
     sourceControl: {
       provider: "github",

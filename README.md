@@ -1,8 +1,6 @@
-# bugsnag-deploy-action
+# bugsnag-release-action
 
-[THIS REPO IS JUST A PLACEHOLDER AND THIS ACTION IS NOT FUNCTIONAL YET]
-
-Notify Bugsnag of a deployment
+Notify Bugsnag of a release/deployment
 
 ## Inputs
 
@@ -10,8 +8,23 @@ Notify Bugsnag of a deployment
 
 **Required** The Bugsnag API Key for your project.
 
+### `appVersion`
+
+The version of the application that you are deploying. If action is triggered by a release, it will use the tag by default.
+
+### `metadata`
+
+Optional metadata tags pertinent to the release
+    required: false
+
+### `releaseStage`
+
+This identifies the unique stage/environment that the application code has been released to. Defaults to `production`
+
 ## Example usage
 
-uses: psprings/bugsnag-deploy-action@v1
+```yaml
+uses: psprings/bugsnag-release-action@v0.0.3
 with:
   apiKey: 'APIKEYHERE'
+```

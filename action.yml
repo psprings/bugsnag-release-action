@@ -1,5 +1,5 @@
-name: 'Bugsnag Deploy'
-description: 'Notify Bugsnag of a deployment'
+name: 'Bugsnag Release'
+description: 'Notify Bugsnag of a release/deployment'
 inputs:
   apiKey:
     description: 'The Bugsnag API Key for your project'
@@ -9,6 +9,10 @@ inputs:
     required: false
   metadata:
     description: 'Optional metadata tags pertinent to the release'
+    required: false
+  releaseStage:
+    description: 'This identifies the unique stage/environment that the application code has been released to. Defaults to `production`'
+    default: 'production'
     required: false
 runs:
   using: 'node12'
