@@ -7,6 +7,10 @@ inputs:
   appVersion:
     description: 'The version of the application that you are deploying. If action is triggered by a release, it will use the tag by default.'
     required: false
+  autoAssignRelease:
+    description: 'Allows you to notify Bugsnag that a new version has been released to a particular release stage'
+    default: false
+    required: false
   metadata:
     description: 'Optional metadata tags pertinent to the release'
     required: false
