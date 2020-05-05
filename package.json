@@ -1,5 +1,5 @@
 {
-  "name": "bugsnap-deploy-action",
+  "name": "bugsnag-deploy-action",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/psprings/bugsnap-deploy-action.git"
+    "url": "git+https://github.com/psprings/bugsnag-deploy-action.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/psprings/bugsnap-deploy-action/issues"
+    "url": "https://github.com/psprings/bugsnag-deploy-action/issues"
   },
-  "homepage": "https://github.com/psprings/bugsnap-deploy-action#readme",
+  "homepage": "https://github.com/psprings/bugsnag-deploy-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.4",
     "@actions/github": "^2.1.1"

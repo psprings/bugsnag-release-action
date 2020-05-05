@@ -1,17 +1,17 @@
-# bugsnap-deploy-action
+# bugsnag-deploy-action
 
 [THIS REPO IS JUST A PLACEHOLDER AND THIS ACTION IS NOT FUNCTIONAL YET]
 
-Notify Bugsnap of a deployment
+Notify Bugsnag of a deployment
 
 ## Inputs
 
 ### `apiKey`
 
-**Required** The Bugsnap API Key for your project.
+**Required** The Bugsnag API Key for your project.
 
 ## Example usage
 
-uses: psprings/bugsnap-deploy-action@v1
+uses: psprings/bugsnag-deploy-action@v1
 with:
   apiKey: 'APIKEYHERE'
