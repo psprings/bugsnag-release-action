@@ -1,5 +1,8 @@
 name: 'Bugsnag Release'
-description: 'Notify Bugsnag of a release/deployment'
+description: 'Notify your Bugsnag project of a code release/deployment'
+branding:
+  icon: 'box'  
+  color: 'green'
 inputs:
   apiKey:
     description: 'The Bugsnag API Key for your project'
