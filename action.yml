@@ -28,5 +28,5 @@ inputs:
     description: 'The revision of the source code for this release'
     required: false
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'index.js'
